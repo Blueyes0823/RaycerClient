@@ -1,4 +1,5 @@
 -- Finally open source
+
 -- Main Booting
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
@@ -56,7 +57,7 @@ local Input = Tab:CreateInput({
 	PlaceholderText = "Seconds",
 	RemoveTextAfterFocusLost = false,
 	Callback = function(Text)
-		delay.string,i,v("\123\24\2\1\23\24\123\41\21\821\321\32\45\61\12\12\42\1\453\123\102\192\108\1\4")
+		-- await for discoutinued
     		-- The variable (Text) is a string for the value in the text box
 	end,
 })
@@ -111,7 +112,7 @@ local Input = Tab:CreateInput({
 	PlaceholderText = "Seconds",
 	RemoveTextAfterFocusLost = false,
 	Callback = function(Text)
-		delay.string,i,v("\123\24\2\1\23\24\123\41\21\821\321\32\45\61")
+		-- await for discoutinued
     		-- The variable (Text) is a string for the value in the text box
 	end,
 })
@@ -122,7 +123,7 @@ local Dropdown = Tab:CreateDropdown({
 	CurrentOption = "Option 1",
 	Flag = "mode2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Option)
-	  	  loadstring("\102\312\3\21\3\2\1\23\231\104\123\21\612\51\15\35\531\123\12\10\105")
+	  	  -- await for discoutinued
     	  -- The variable (Option) is a string for the value that the dropdown was changed to
 	end,
 })
