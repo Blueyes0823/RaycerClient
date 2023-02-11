@@ -1,0 +1,361 @@
+-- Main Booting
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+-- Window Create
+local Window = Rayfield:CreateWindow({
+	Name = "Raycer Client V4.1 Lite",
+	LoadingTitle = "Loading Raycer Client...",
+	LoadingSubtitle = "Version 4.1",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = V4Raycerlite, -- Create a custom folder for your hub/game
+		FileName = "V4raycerlite"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "raycer", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	KeySystem = true, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Raycer Client V4.1 Lite",
+		Subtitle = "Secure Key System",
+		Note = "Enter the key from #Key",
+		FileName = "V4Litekeys",
+		SaveKey = false,
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = "uTMi491ksm19dlPlsma4"
+	}
+})
+
+-- Testing Tab
+local Tab = Window:CreateTab("AutoWin") -- Title, Image
+local Section = Tab:CreateSection("AutoWin Configs")
+
+local Paragraph = Tab:CreateParagraph({Title = "AutoWin", Content = "Configuration Settings"})
+
+local Button = Tab:CreateButton({
+	Name = "Full Autowin",
+	Callback = function()
+		for i, v in pairs(game:GetService("Players"):GetChildren()) do
+
+
+            if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Team ~= game.Players.LocalPlayer.Team then
+                print(v.Name)
+                repeat wait(0.2)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+                until v.Character.Humanoid.Health == 0 or not v.Character:FindFirstChild("Humanoid")
+            end
+        end
+	end,
+})
+
+local Input = Tab:CreateInput({
+	Name = "Teleport Delay",
+	PlaceholderText = "Seconds",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+		-- The function that takes place when the input is changed
+    		-- The variable (Text) is a string for the value in the text box
+	end,
+})
+
+local Dropdown = Tab:CreateDropdown({
+	Name = "AutoWin Mode",
+	Options = {"Normal","Classic"},
+	CurrentOption = "Option 1",
+	Flag = "mode1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Option)
+	  	  -- The function that takes place when the selected option is changed
+    	  -- The variable (Option) is a string for the value that the dropdown was changed to
+	end,
+})
+
+local Section = Tab:CreateSection("KillAura Configs")
+local Paragraph = Tab:CreateParagraph({Title = "KillAura", Content = "Configuration Settings"})
+
+local Button = Tab:CreateButton({
+	Name = "KillAura",
+	Callback = function()
+		local player = game:GetService("Players")
+local lplr = player.LocalPlayer
+local cam = workspace.CurrentCamera
+local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+local SwordCont = KnitClient.Controllers.SwordController
+
+local aura = false
+local DistVal = {["Value"] = 14}
+function Aura()
+	for i,v in pairs(game.Players:GetChildren()) do
+		if v.Character and v.Name ~= game.Players.LocalPlayer.Name and v.Character:FindFirstChild("HumanoidRootPart") then
+			local mag = (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+			if mag <= DistVal["Value"] and v.Team ~= game.Players.LocalPlayer.Team and v.Character:FindFirstChild("Humanoid") then
+				if v.Character.Humanoid.Health > 0 then
+					aura = true
+                    SwordCont:swingSwordAtMouse()
+end
+end
+end
+end
+end
+
+game:GetService("RunService").Stepped:connect(function()
+Aura()
+end)
+end
+})
+
+local Input = Tab:CreateInput({
+	Name = "Swing Delay",
+	PlaceholderText = "Seconds",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+		-- The function that takes place when the input is changed
+    		-- The variable (Text) is a string for the value in the text box
+	end,
+})
+
+local Dropdown = Tab:CreateDropdown({
+	Name = "KillAura Mode",
+	Options = {"Tool","Players"},
+	CurrentOption = "Option 1",
+	Flag = "mode2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Option)
+	  	  -- The function that takes place when the selected option is changed
+    	  -- The variable (Option) is a string for the value that the dropdown was changed to
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Ignore Behind Wall",
+	Callback = function()
+		Rayfield:Notify({
+			Title = "Enabled!",
+			Content = "Ignore Behind Wall for KillAura",
+			Duration = 3.5,
+			Image = 4483362458,
+			Actions = { -- Notification Buttons
+				Ignore = {
+					Name = "Okay!",
+					Callback = function()
+						print("The user tapped Okay!")
+					end
+				},
+			},
+		})
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Ignore 90 Angles",
+	Callback = function()
+		Rayfield:Notify({
+			Title = "Enabled!",
+			Content = "Ignore 90 Angles for KillAura",
+			Duration = 3.5,
+			Image = 4483362458,
+			Actions = { -- Notification Buttons
+				Ignore = {
+					Name = "Okay!",
+					Callback = function()
+						print("The user tapped Okay!")
+					end
+				},
+			},
+		})
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Ignore Jumping",
+	Callback = function()
+		Rayfield:Notify({
+			Title = "Enabled!",
+			Content = "Ignore Jumping for KillAura",
+			Duration = 3.5,
+			Image = 4483362458,
+			Actions = { -- Notification Buttons
+				Ignore = {
+					Name = "Okay!",
+					Callback = function()
+						print("The user tapped Okay!")
+					end
+				},
+			},
+		})
+	end,
+})
+
+local Tab = Window:CreateTab("BedTp") -- Title, Image
+local Section = Tab:CreateSection("Teleport to Bed")
+
+local Paragraph = Tab:CreateParagraph({Title = "Warning!", Content = "This only works 2 time, after 2 times you need to respawn."})
+
+local Button = Tab:CreateButton({
+	Name = "No Lagback BedTp(CFrame)",
+	Callback = function()
+		repeat
+            task.wait()
+        until game:IsLoaded()
+        
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+        end)
+        
+        local network_owner = getnetworkowner or isnetworkowner or networkowner or checknetworkowner or networkcheck
+        
+        function xprint(s)
+        if rconsoleprint then
+           rconsoleprint(s .. '\n')
+        end
+        end
+        
+        function stop(s)
+            beds = false
+            for i, v in next, workspace:GetChildren() do
+                if v.Name == "bed" and tostring(v.Covers.BrickColor) == s then
+                    x = true
+                end
+                if v.Name == 'bed' and tostring(v.Covers.BrickColor) ~= tostring(game:service'Players'.LocalPlayer.TeamColor) then
+                    beds = true
+                end
+            end
+            if beds == false then
+                if getgenv().killed == nil then
+                    game:service "Players".LocalPlayer.Character.Humanoid.Health = 0
+                    getgenv().killed = true
+                end
+               return 1
+            end
+            if x == true then
+                x = false
+                return "hi"
+            else
+                return nil
+            end
+        end
+        
+        function getPlr()
+            nMagnitude = nil
+            r = nil
+            for i,v in next, game:service'Players':GetPlayers() do
+                  if v.Character and v.Character.Humanoid.RootPart and v.TeamColor ~= game:service'Players'.LocalPlayer.TeamColor and v.Character:FindFirstChild('Humanoid') and v.Character.Humanoid.Health > 0 and v ~= game:service'Players'.LocalPlayer then
+                        magnitude = (v.Character.Humanoid.RootPart.Position - game:service'Players'.LocalPlayer.Character.Humanoid.RootPart.Position).Magnitude
+                        if nMagnitude ~= nil then
+                            if magnitude < nMagnitude then
+                               r = v
+                               nMagnitude = magnitude
+                            end
+                        else
+                            nMagnitude = magnitude
+                            r = v
+                     end
+                  end
+               end
+               return r
+        end
+        
+        xprint('Roblox Scripts by Raycer Client')
+         if network_owner then
+        function checkNetwork()
+        local network_owner = getnetworkowner or isnetworkowner or networkowner or checknetworkowner or networkcheck
+        if network_owner and network_owner(game:service'Players'.LocalPlayer.Character.Humanoid.RootPart) == true then
+        else
+               if stop(tostring(game:service'Players'.LocalPlayer.TeamColor)) ~= nil then
+               workspace:WaitForChild(game:service'Players'.LocalPlayer.Name):WaitForChild('Humanoid').Health = 0
+               workspace:WaitForChild(game:service'Players'.LocalPlayer.Name):WaitForChild('Humanoid'):ChangeState('Dead')
+               workspace:WaitForChild(game:service'Players'.LocalPlayer.Name):WaitForChild('HumanoidRootPart').CFrame = CFrame.new(0,-500,0)
+               end
+            end
+        end
+        else
+        task.spawn(function()
+        while task.wait(15) do
+        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+        end
+        end)
+        function checkNetwork() end
+        end
+        
+        game:GetService('StarterGui'):SetCore("SendNotification", {
+            Title = "Loaded!"; 
+            Text = "Roblox Scripts by Raycer Client"; 
+            Duration = 12; 
+        })
+        
+        game:service "Players".LocalPlayer.Character.Humanoid.Health = 0
+        
+        local function bedtp()
+            task.wait(0.1)
+            char = game:service "Players".LocalPlayer.Character
+            bedtablex = {}
+            for i, v in next, workspace:GetChildren() do
+                if v.Name == "bed" then
+                    table.insert(bedtablex, tostring(v.Covers.BrickColor))
+                end
+            end
+        
+            if stop('trans pride!') == 1 then
+                     while task.wait(0.18) do
+                        checkNetwork()
+                        v = getPlr()
+                        char:PivotTo(CFrame.new(v.Character.Humanoid.RootPart.Position))
+               end
+            end
+        
+            for i,v in next, bedtablex do
+                for x,bed in next, workspace:GetChildren() do
+                    if bed.Name == "bed" and tostring(bed.Covers.BrickColor) == v and tostring(bed.Covers.BrickColor) ~= tostring(game:service'Players'.LocalPlayer.TeamColor) then
+                        xprint(v .. ' < bed target')
+                        char:PivotTo(CFrame.new(bed.Position + Vector3.new(0,20,0)))
+                        repeat task.wait() until stop(v) == nil
+                        game:service "Players".LocalPlayer.Character.Humanoid.Health = 0
+                    end
+                end
+            end
+        end
+        
+        game:service "Players".LocalPlayer.CharacterAdded:Connect(bedtp)
+	end,
+})
+
+local Tab = Window:CreateTab("Loader") -- Title, Image
+local Section = Tab:CreateSection("Loader")
+
+local Button = Tab:CreateButton({
+	Name = "Infinite Yield",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Vape V4",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "AutoClicker",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JustEzpi/ROBLOX-Scripts/main/ROBLOX_AutoClicker", true))()
+	end,
+})
+
+local Tab = Window:CreateTab("Credits") -- Title, Image
+local Section = Tab:CreateSection("Credits")
+
+local Paragraph = Tab:CreateParagraph({Title = "Discord:", Content = "Blueyes0823#6969"})
+local Paragraph = Tab:CreateParagraph({Title = "YouTube:", Content = "I'm Bobo"})
+local Paragraph = Tab:CreateParagraph({Title = "Discord Server:", Content = "discord.gg/raycer"})
+
+local Tab = Window:CreateTab("Misc") -- Title, Image
+local Section = Tab:CreateSection("Miscellaneous")
+
+local Button = Tab:CreateButton({
+	Name = "Destroy GUI",
+	Callback = function()
+		Rayfield:Destroy()
+	end,
+})
